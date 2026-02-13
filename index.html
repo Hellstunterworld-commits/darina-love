@@ -69,21 +69,6 @@ canvas {
     left: 0;
     pointer-events: none;
 }
-
-/* КОТИКИ */
-#cats {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    z-index: 3;
-}
-
-#cats img {
-    width: 120px;
-    margin: 10px;
-}
 </style>
 </head>
 
@@ -104,13 +89,6 @@ canvas {
     </div>
 </div>
 
-<!-- Танцюючі котики -->
-<div id="cats">
-    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
-    <img src="https://media.giphy.com/media/mlvseq9yvZhba/giphy.gif">
-    <img src="https://media.giphy.com/media/13borq7Zo2kulO/giphy.gif">
-</div>
-
 <script>
 window.onload = function() {
 
@@ -118,7 +96,6 @@ window.onload = function() {
     const noBtn = document.getElementById("noBtn");
     const result = document.getElementById("result");
     const buttons = document.getElementById("buttons");
-    const cats = document.getElementById("cats");
 
     // Кнопка НІ тікає
     noBtn.addEventListener("mouseover", function() {
@@ -135,14 +112,9 @@ window.onload = function() {
         buttons.style.display = "none";
         result.style.display = "block";
         startFireworks();
-
-        // Через 2 секунди показати котиків
-        setTimeout(() => {
-            cats.style.display = "block";
-        }, 2000);
     });
 
-    // ФЕЄРВЕРК
+    // ----- ФЕЄРВЕРК -----
     const canvas = document.getElementById("fireworks");
     const ctx = canvas.getContext("2d");
     canvas.width = window.innerWidth;
@@ -180,3 +152,17 @@ window.onload = function() {
 
             if (p.speed < 0.5) particles.splice(i,1);
         });
+
+        requestAnimationFrame(update);
+    }
+
+    function startFireworks() {
+        setInterval(createFirework, 700);
+        update();
+    }
+
+};
+</script>
+
+</body>
+</html>
